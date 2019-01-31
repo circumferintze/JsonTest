@@ -6,7 +6,7 @@ namespace JsonTestApp
 {
     public class Reader : IReader
     {
-            public JToken Convert()
+        public JToken Convert()
         {
             string filePath = System.IO.Path.GetFullPath("dataModel.json");
 

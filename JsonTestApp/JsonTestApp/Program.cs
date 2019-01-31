@@ -8,8 +8,8 @@ namespace JsonTestApp
         {
             Reader x = new Reader();
             var jToken = x.Convert();
-            JSONConvertor j = new JSONConvertor(jToken);
-            var fields = j.GetAllFields();
+            JsonDeserializer j = new JsonDeserializer();
+            var fields = j.GetFields(jToken);
 
             foreach (var field in fields)
                 Console.WriteLine($"{field.Key} : {field.Value}");
