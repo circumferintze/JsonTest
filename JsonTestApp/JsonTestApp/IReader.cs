@@ -4,6 +4,7 @@ namespace JsonTestApp
 {
     public interface IReader
     {
-        JToken Convert();
+        string Read();
+        JToken Convert(string input);
     }
 }

@@ -6,19 +6,29 @@ namespace JsonTestApp
 {
     public class Reader : IReader
     {
-        public JToken Convert()
+        public string Read()
         {
             string filePath = System.IO.Path.GetFullPath("dataModel.json");
 
-            string jsonInput;
+            string input;
             using (StreamReader r = new StreamReader(filePath))
             {
-                jsonInput = r.ReadToEnd();
+                input = r.ReadToEnd();
             }
 
-            JToken jsonObject = JsonConvert.DeserializeObject<JToken>(jsonInput);
+            return input;
+        }
+
+        public JToken Convert(string input)
+        {
+            JToken jsonObject = JsonConvert.DeserializeObject<JToken>(input);
 
             return jsonObject;
+        }
+
+        public void Deserialize()
+        {
+
         }
     }
 }

@@ -7,12 +7,18 @@ namespace JsonTestApp
         static void Main(string[] args)
         {
             Reader x = new Reader();
-            var jToken = x.Convert();
+            var input = x.Read();
+
+            var jToken = x.Convert(input);
+
             JsonDeserializer j = new JsonDeserializer();
             var fields = j.GetFields(jToken);
 
-            foreach (var field in fields)
-                Console.WriteLine($"{field.Key} : {field.Value}");
+            Writer w = new Writer();
+            w.Write(fields);
+
+            JSONSerializer js = new JSONSerializer();
+            js.Serialize();
 
             Console.ReadKey();
         }
