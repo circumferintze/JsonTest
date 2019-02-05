@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTestApp", "JsonTestApp\JsonTestApp.csproj", "{D7B1E66A-6E56-4855-976A-0BF49511387E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{084BA619-1A79-477C-AFCE-D0662ACBDAA4}"
+	ProjectSection(SolutionItems) = preProject
+		JsonTestApp\bin\Debug\dataModel.json = JsonTestApp\bin\Debug\dataModel.json
+		JsonTestApp\bin\Debug\output2.txt = JsonTestApp\bin\Debug\output2.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

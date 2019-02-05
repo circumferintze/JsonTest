@@ -18,9 +18,9 @@ namespace JsonTestApp
             w.Write(fields);
 
             JSONSerializer js = new JSONSerializer();
-            js.Serialize();
-
-            Console.ReadKey();
+            var xxx = js.Read();
+            
+            js.Writer2(xxx);
         }
     }
 }
