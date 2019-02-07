@@ -8,7 +8,7 @@ namespace JsonTestApp
     {
         public string Read()
         {
-            string filePath = System.IO.Path.GetFullPath("dataModel.json");
+            string filePath = System.IO.Path.GetFullPath("documents.json");
 
             string input;
             using (StreamReader r = new StreamReader(filePath))
@@ -24,11 +24,6 @@ namespace JsonTestApp
             JToken jsonObject = JsonConvert.DeserializeObject<JToken>(input);
 
             return jsonObject;
-        }
-
-        public void Deserialize()
-        {
-
         }
     }
 }

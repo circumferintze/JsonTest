@@ -24,7 +24,7 @@ namespace JsonTestApp
         {
             JObject obj = new JObject();
 
-            string filePath = System.IO.Path.GetFullPath("output2.txt");
+            string filePath = System.IO.Path.GetFullPath("output.txt");
 
             string input;
             using (StreamReader r = new StreamReader(filePath))
@@ -32,10 +32,9 @@ namespace JsonTestApp
                 input = r.ReadToEnd();
             }
 
-            var inputList = input.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-
-            var dictionary = inputList.Select(x => x.Split(':'))
-                              .GroupBy(x => x[0].Split('.'))
+            var inputList = input.Replace("\"","").Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var dictionary = inputList.Select(x => x.Split('\t'))
+                              .GroupBy(x => x[0].Split(new string[] {@"." }, StringSplitOptions.RemoveEmptyEntries))
                               .ToDictionary(x => x.Key.AsEnumerable(), x => x.Select(g => g[1]).Distinct().FirstOrDefault());
 
             foreach (var item in dictionary)

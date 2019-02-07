@@ -14,7 +14,7 @@ namespace JsonTestApp
         {
             using (StreamWriter file = new StreamWriter("output.txt"))
                 foreach (var field in dictionary)
-                    file.WriteLine($"{field.Key} : {field.Value}");
+                    file.WriteLine($"{field.Key}\t{field.Value}");
         }
     }
 }

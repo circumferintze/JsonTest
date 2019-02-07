@@ -13,9 +13,10 @@ namespace JsonTestApp
 
             JsonDeserializer j = new JsonDeserializer();
             var fields = j.GetFields(jToken);
+            var formatedFields = j.Format(fields);
 
             Writer w = new Writer();
-            w.Write(fields);
+            w.Write(formatedFields);
 
             JSONSerializer js = new JSONSerializer();
             var xxx = js.Read();

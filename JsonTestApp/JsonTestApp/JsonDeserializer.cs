@@ -31,11 +31,23 @@ namespace JsonTestApp
                     break;
 
                 default:
-                    fields.Add(jsonObject.Path, (JValue)jsonObject);
+                    fields.Add(jsonObject.Path.Trim(new char[] {'[' }).Replace("[", ".").Replace("]", "").Replace("'",""), (JValue)jsonObject);
                     break;
             }
 
             return fields;
+        }
+
+        public Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
+        {
+            Dictionary<string, JValue> formatedDictionary = new Dictionary<string, JValue>();
+            foreach (var item in dictionary)
+            {
+                var key = item.Key.Replace(".", @""".""");
+                formatedDictionary.Add("\""+key+ "\"", item.Value);
+            }
+
+            return formatedDictionary;
         }
     }
 }
