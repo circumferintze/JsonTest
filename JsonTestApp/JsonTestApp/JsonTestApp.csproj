@@ -62,16 +62,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Deserializer.cs" />
+    <Compile Include="Interfaces\IJsonWriter.cs" />
     <Compile Include="Interfaces\IDeserializer.cs" />
     <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IDictionaryWriter.cs" />
     <Compile Include="JsonToTxtConverter.cs" />
-    <Compile Include="JSONSerializer.cs" />
+    <Compile Include="JsonWriter.cs" />
+    <Compile Include="TxtToJsonConverter.cs" />
     <Compile Include="ArgsOptions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reader.cs" />
-    <Compile Include="DicitonaryWriter.cs" />
+    <Compile Include="DictionaryWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

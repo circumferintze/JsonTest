@@ -51,7 +51,6 @@ namespace JsonTestApp
                     break;
             }
 
-            //return fields;
             return Format(fields);
         }
         private Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
