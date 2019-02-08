@@ -32,9 +32,9 @@ namespace JsonTestApp
                 input = r.ReadToEnd();
             }
 
-            var inputList = input.Replace("\"","").Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            var inputList = input.Replace("\"", "").Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
             var dictionary = inputList.Select(x => x.Split('\t'))
-                              .GroupBy(x => x[0].Split(new string[] {@"." }, StringSplitOptions.RemoveEmptyEntries))
+                              .GroupBy(x => x[0].Split(new string[] { @"." }, StringSplitOptions.RemoveEmptyEntries))
                               .ToDictionary(x => x.Key.AsEnumerable(), x => x.Select(g => g[1]).Distinct().FirstOrDefault());
 
             foreach (var item in dictionary)
@@ -109,8 +109,6 @@ namespace JsonTestApp
                 j.WriteTo(writer);
             }
         }
-
-        
 
         //for (int i = 0; i < inputArray.Length; ++i)
         //{

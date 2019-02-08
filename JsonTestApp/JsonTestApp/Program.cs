@@ -1,17 +1,33 @@
-﻿using System;
+﻿using CommandLine;
+using System;
 
 namespace JsonTestApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            var a = Parser.Default.ParseArguments<ArgsOptions>(args)
+                   .WithParsed<ArgsOptions>(o =>
+                   {
+                       if (o.Verbose)
+                       {
+                           Console.WriteLine($"Verbose output enabled. Current Arguments: -v {o.Verbose}");
+                           Console.WriteLine("Quick Start Example! App is in Verbose mode!");
+                       }
+                       else
+                       {
+                           Console.WriteLine($"Current Arguments: -v {o.Verbose}");
+                           Console.WriteLine("Quick Start Example!");
+                       }
+                   });
+
             Reader x = new Reader();
             var input = x.Read();
 
             var jToken = x.Convert(input);
 
-            JsonDeserializer j = new JsonDeserializer();
+            JsonConverter j = new JsonConverter();
             var fields = j.GetFields(jToken);
             var formatedFields = j.Format(fields);
 
@@ -20,8 +36,10 @@ namespace JsonTestApp
 
             JSONSerializer js = new JSONSerializer();
             var xxx = js.Read();
-            
+
             js.Writer2(xxx);
+
+            Console.ReadKey();
         }
     }
 }

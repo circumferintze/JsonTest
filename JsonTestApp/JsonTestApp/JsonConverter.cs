@@ -1,19 +1,25 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using JsonTestApp.Interfaces;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
 namespace JsonTestApp
 {
-    public class JsonDeserializer : IJsonDeserializer
+    public class JsonConverter 
     {
         private readonly Dictionary<string, JValue> fields;
+        private readonly IReader _reader;
+        private readonly IDeserializer _deserializer;
 
-        public JsonDeserializer()
+        public JsonConverter(IReader reader, IDeserializer deserializer)
         {
             fields = new Dictionary<string, JValue>();
+            _reader = reader;
+            _deserializer = deserializer;
         }
 
         public Dictionary<string, JValue> GetFields(JToken jsonObject)
         {
+            
             switch (jsonObject.Type)
             {
                 case JTokenType.Object:
@@ -31,7 +37,7 @@ namespace JsonTestApp
                     break;
 
                 default:
-                    fields.Add(jsonObject.Path.Trim(new char[] {'[' }).Replace("[", ".").Replace("]", "").Replace("'",""), (JValue)jsonObject);
+                    fields.Add(jsonObject.Path.Trim(new char[] { '[' }).Replace("[", ".").Replace("]", "").Replace("'", ""), (JValue)jsonObject);
                     break;
             }
 
@@ -44,7 +50,7 @@ namespace JsonTestApp
             foreach (var item in dictionary)
             {
                 var key = item.Key.Replace(".", @""".""");
-                formatedDictionary.Add("\""+key+ "\"", item.Value);
+                formatedDictionary.Add("\"" + key + "\"", item.Value);
             }
 
             return formatedDictionary;

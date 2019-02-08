@@ -1,29 +1,26 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.IO;
+﻿using System.IO;
 
 namespace JsonTestApp
 {
     public class Reader : IReader
     {
+        private readonly string arg;
+
+        public Reader(string arg)
+        {
+            this.arg = arg;
+        }
         public string Read()
         {
-            string filePath = System.IO.Path.GetFullPath("documents.json");
+            string filePath = System.IO.Path.GetFullPath(arg);
 
-            string input;
+            string file;
             using (StreamReader r = new StreamReader(filePath))
             {
-                input = r.ReadToEnd();
+                file = r.ReadToEnd();
             }
 
-            return input;
-        }
-
-        public JToken Convert(string input)
-        {
-            JToken jsonObject = JsonConvert.DeserializeObject<JToken>(input);
-
-            return jsonObject;
+            return file;
         }
     }
 }
