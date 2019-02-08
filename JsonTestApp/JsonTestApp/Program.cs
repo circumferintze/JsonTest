@@ -12,6 +12,7 @@ namespace JsonTestApp
             Deserializer des = new Deserializer();
             DictionaryWriter wr = new DictionaryWriter(args[1]);
             JsonToTxtConverter js = new JsonToTxtConverter(reader, des, wr);
+            js.Convert();
 
             Console.ReadKey();
         }
