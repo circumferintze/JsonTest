@@ -4,22 +4,27 @@ using System.Collections.Generic;
 
 namespace JsonTestApp
 {
-    public class JsonConverter 
+    public class JsonToTxtConverter 
     {
         private readonly Dictionary<string, JValue> fields;
         private readonly IReader _reader;
         private readonly IDeserializer _deserializer;
 
-        public JsonConverter(IReader reader, IDeserializer deserializer)
+        public JsonToTxtConverter(IReader reader, IDeserializer deserializer)
         {
             fields = new Dictionary<string, JValue>();
             _reader = reader;
             _deserializer = deserializer;
         }
 
+        public void Convert()
+        {
+            var file = _reader.Read();
+            var jsonObject = _deserializer.Deserialize(file);
+        }
+
         public Dictionary<string, JValue> GetFields(JToken jsonObject)
         {
-            
             switch (jsonObject.Type)
             {
                 case JTokenType.Object:
@@ -37,14 +42,15 @@ namespace JsonTestApp
                     break;
 
                 default:
-                    fields.Add(jsonObject.Path.Trim(new char[] { '[' }).Replace("[", ".").Replace("]", "").Replace("'", ""), (JValue)jsonObject);
+                    fields.Add(jsonObject.Path.Trim(new char[] { '[' }).Replace("[", ".").Replace("]", "").Replace("'", ""), 
+                        (JValue)jsonObject);
                     break;
             }
 
-            return fields;
+            //return fields;
+            return Format(fields);
         }
-
-        public Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
+        private Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
         {
             Dictionary<string, JValue> formatedDictionary = new Dictionary<string, JValue>();
             foreach (var item in dictionary)

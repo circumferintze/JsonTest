@@ -65,7 +65,7 @@
     <Compile Include="Interfaces\IDeserializer.cs" />
     <Compile Include="Interfaces\IReader.cs" />
     <Compile Include="Interfaces\IWriter.cs" />
-    <Compile Include="JsonConverter.cs" />
+    <Compile Include="JsonToTxtConverter.cs" />
     <Compile Include="JSONSerializer.cs" />
     <Compile Include="ArgsOptions.cs" />
     <Compile Include="Program.cs" />

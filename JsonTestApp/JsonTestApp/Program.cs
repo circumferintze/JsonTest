@@ -27,7 +27,7 @@ namespace JsonTestApp
 
             var jToken = x.Convert(input);
 
-            JsonConverter j = new JsonConverter();
+            JsonToTxtConverter j = new JsonToTxtConverter();
             var fields = j.GetFields(jToken);
             var formatedFields = j.Format(fields);
 
