@@ -8,13 +8,33 @@ namespace JsonTestApp
         private static void Main(string[] args)
         {
             var inputPath = args[0];
-            Reader reader = new Reader(inputPath);
-            Deserializer des = new Deserializer();
-            DictionaryWriter wr = new DictionaryWriter(args[1]);
-            JsonToTxtConverter js = new JsonToTxtConverter(reader, des, wr);
-            js.Convert();
+            var extension = inputPath.Split('.');
+            switch (extension[1].ToUpper())
+            {
+                case "JSON":
+                    {
+                        Reader reader = new Reader(inputPath);
+                        Deserializer des = new Deserializer();
+                        DictionaryWriter wr = new DictionaryWriter(args[1]);
+                        DictionaryFormater df = new DictionaryFormater();
+                        JsonToTxtConverter js = new JsonToTxtConverter(reader, des, wr, df);
+                        js.Convert();
+                        break;
+                    }
+                case "TXT":
+                    {
+                        Reader reader = new Reader(inputPath);
+                        DictionaryFormater df = new DictionaryFormater();
+                        JsonWriter jw = new JsonWriter();
+                        TxtToJsonConverter tj = new TxtToJsonConverter(reader, jw, df);
+                        break;
+                    }
 
-            Console.ReadKey();
+                default:
+                    Console.WriteLine("Invalid file extension");
+                    break;
+            }
+    
         }
     }
 }

@@ -10,13 +10,15 @@ namespace JsonTestApp
         private readonly IReader _reader;
         private readonly IDeserializer _deserializer;
         private readonly IDictionaryWriter _writer;
+        private readonly IDictionaryFormater _formater;
 
-        public JsonToTxtConverter(IReader reader, IDeserializer deserializer, IDictionaryWriter writer)
+        public JsonToTxtConverter(IReader reader, IDeserializer deserializer, IDictionaryWriter writer, IDictionaryFormater formater)
         {
             fields = new Dictionary<string, JValue>();
             _reader = reader;
             _deserializer = deserializer;
             _writer = writer;
+            _formater = formater;
         }
 
         public void Convert()
@@ -51,18 +53,8 @@ namespace JsonTestApp
                     break;
             }
 
-            return Format(fields);
+            return _formater.Format(fields);
         }
-        private Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
-        {
-            Dictionary<string, JValue> formatedDictionary = new Dictionary<string, JValue>();
-            foreach (var item in dictionary)
-            {
-                var key = item.Key.Replace(".", @""".""");
-                formatedDictionary.Add("\"" + key + "\"", item.Value);
-            }
-
-            return formatedDictionary;
-        }
+        
     }
 }

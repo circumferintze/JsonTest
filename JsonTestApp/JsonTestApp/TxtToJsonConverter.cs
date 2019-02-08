@@ -11,30 +11,29 @@ namespace JsonTestApp
         private JObject json;
         private Dictionary<IEnumerable<string>, string> dictionary;
         private readonly IReader _reader;
+        private readonly IJsonWriter _writer;
+        private readonly IDictionaryFormater _dictionaryFormater;
 
-        public TxtToJsonConverter(IReader reader)
+        public TxtToJsonConverter(IReader reader, IJsonWriter writer, IDictionaryFormater dictionaryFormater)
         {
             inputList = new List<string>();
             json = new JObject();
             dictionary = new Dictionary<IEnumerable<string>, string>();
             _reader = reader;
+            _writer = writer;
+            _dictionaryFormater = dictionaryFormater;
         }
 
         public void Convert()
         {
             var file = _reader.Read();
+            var dictionary = _dictionaryFormater.ParseToDictionary(file);
+            var json = CreateJson(dictionary);
+            _writer.Writer(json);
         }
 
-        private Dictionary<IEnumerable<string>, string> ParseToDictionary (string file)
-        {
-            var inputList = file.Replace("\"", "").Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            var dictionary = inputList.Select(x => x.Split('\t'))
-                              .GroupBy(x => x[0].Split(new string[] { @"." }, StringSplitOptions.RemoveEmptyEntries))
-                              .ToDictionary(x => x.Key.AsEnumerable(), x => x.Select(g => g[1]).Distinct().FirstOrDefault());
-
-            return dictionary;
-        }
-        public JObject CreateJson()
+        
+        public JObject CreateJson(Dictionary<IEnumerable<string>, string> dictionary)
         {
             JObject jsonObject = new JObject();
             foreach (var item in dictionary)
