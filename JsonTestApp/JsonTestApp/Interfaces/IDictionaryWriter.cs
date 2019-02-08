@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JsonTestApp
 {
-    public interface IWriter
+    public interface IDictionaryWriter
     {
         void Write(Dictionary<string, JValue> dictionary);
     }

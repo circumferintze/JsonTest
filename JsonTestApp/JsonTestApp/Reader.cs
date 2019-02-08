@@ -4,15 +4,15 @@ namespace JsonTestApp
 {
     public class Reader : IReader
     {
-        private readonly string arg;
+        private readonly string _arg;
 
         public Reader(string arg)
         {
-            this.arg = arg;
+            _arg = arg;
         }
         public string Read()
         {
-            string filePath = System.IO.Path.GetFullPath(arg);
+            string filePath = System.IO.Path.GetFullPath(_arg);
 
             string file;
             using (StreamReader r = new StreamReader(filePath))

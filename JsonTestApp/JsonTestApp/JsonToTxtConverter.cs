@@ -9,21 +9,25 @@ namespace JsonTestApp
         private readonly Dictionary<string, JValue> fields;
         private readonly IReader _reader;
         private readonly IDeserializer _deserializer;
+        private readonly IDictionaryWriter _writer;
 
-        public JsonToTxtConverter(IReader reader, IDeserializer deserializer)
+        public JsonToTxtConverter(IReader reader, IDeserializer deserializer, IDictionaryWriter writer)
         {
             fields = new Dictionary<string, JValue>();
             _reader = reader;
             _deserializer = deserializer;
+            _writer = writer;
         }
 
         public void Convert()
         {
             var file = _reader.Read();
             var jsonObject = _deserializer.Deserialize(file);
+            var dictionary = GetFields(jsonObject);
+            _writer.Write(dictionary);
         }
 
-        public Dictionary<string, JValue> GetFields(JToken jsonObject)
+        private Dictionary<string, JValue> GetFields(JToken jsonObject)
         {
             switch (jsonObject.Type)
             {
