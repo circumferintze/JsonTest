@@ -42,7 +42,7 @@ namespace JsonTestApp
                 var prop = CreateFields(item.Key, item.Value).Properties().First();
                 if (jsonObject.Properties().Select(p => p.Name).Any(n => n == prop.Name))
                 {
-                    jsonObject[prop.Name] = B(jsonObject[prop.Name].ToObject<JObject>().Properties(),
+                    jsonObject[prop.Name] = MergeJson(jsonObject[prop.Name].ToObject<JObject>().Properties(),
                                            prop.Value.ToObject<JObject>().Properties().First());
                 }
                 else
@@ -54,7 +54,7 @@ namespace JsonTestApp
             return jsonObject;
         }
 
-        public JToken B(IEnumerable<JProperty> existing, JProperty more)
+        public JToken MergeJson(IEnumerable<JProperty> existing, JProperty more)
         {
             var obj = new JObject();
 
@@ -62,7 +62,7 @@ namespace JsonTestApp
 
             if (same != null)
             {
-                same.Value = B(same.Value.ToObject<JObject>().Properties(),
+                same.Value = MergeJson(same.Value.ToObject<JObject>().Properties(),
                     more.Value.ToObject<JObject>().Properties().First());
 
                 foreach (var prop in existing)
