@@ -6,9 +6,15 @@ namespace JsonTestApp
 {
     public class JsonWriter : IJsonWriter
     {
+        private readonly string _arg;
+
+        public JsonWriter(string arg)
+        {
+            _arg = arg;
+        }
         public void Writer (JObject j)
         {
-            using (StreamWriter file = File.CreateText(@"x.json"))
+            using (StreamWriter file = File.CreateText(_arg))
             using (JsonTextWriter writer = new JsonTextWriter(file))
             {
                 writer.Formatting = Formatting.Indented;

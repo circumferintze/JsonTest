@@ -25,8 +25,9 @@ namespace JsonTestApp
                     {
                         Reader reader = new Reader(inputPath);
                         DictionaryFormater df = new DictionaryFormater();
-                        JsonWriter jw = new JsonWriter();
+                        JsonWriter jw = new JsonWriter(args[1]);
                         TxtToJsonConverter tj = new TxtToJsonConverter(reader, jw, df);
+                        tj.Convert();
                         break;
                     }
 
