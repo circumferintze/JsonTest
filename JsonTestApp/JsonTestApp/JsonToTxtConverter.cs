@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace JsonTestApp
 {
-    public class JsonToTxtConverter 
+    public class JsonToTxtConverter : IJsonToTxtConverter
     {
         private readonly Dictionary<string, JValue> fields;
         private readonly IReader _reader;
@@ -21,12 +21,12 @@ namespace JsonTestApp
             _formater = formater;
         }
 
-        public void Convert()
+        public void Convert(string inputPath, string outputPath)
         {
-            var file = _reader.Read();
+            var file = _reader.Read(inputPath);
             var jsonObject = _deserializer.Deserialize(file);
             var dictionary = GetFields(jsonObject);
-            _writer.Write(dictionary);
+            _writer.Write(dictionary, outputPath);
         }
 
         private Dictionary<string, JValue> GetFields(JToken jsonObject)

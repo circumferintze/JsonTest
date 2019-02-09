@@ -1,5 +1,7 @@
-﻿using CommandLine;
-using System;
+﻿using System;
+using Unity;
+using JsonTestApp.Interfaces;
+using Unity.Injection;
 
 namespace JsonTestApp
 {
@@ -7,35 +9,37 @@ namespace JsonTestApp
     {
         private static void Main(string[] args)
         {
-            var inputPath = args[0];
-            var extension = inputPath.Split('.');
+            IUnityContainer container = new UnityContainer();
+            container.RegisterType<JsonToTxtConverter>();
+            container.RegisterType<TxtToJsonConverter>();
+            container.RegisterType<IReader, Reader>();
+            container.RegisterType<IDeserializer, Deserializer>();
+            container.RegisterType<IDictionaryWriter, DictionaryWriter>();
+            container.RegisterType<IDictionaryFormater, DictionaryFormater>();
+            container.RegisterType<IJsonWriter, JsonWriter>();
+            
+            JsonToTxtConverter txtConverter = container.Resolve<JsonToTxtConverter>();
+            TxtToJsonConverter jsonConverter = container.Resolve<TxtToJsonConverter>();
+
+            var extension = args[0].Split('.');
             switch (extension[1].ToUpper())
             {
                 case "JSON":
                     {
-                        Reader reader = new Reader(inputPath);
-                        Deserializer des = new Deserializer();
-                        DictionaryWriter wr = new DictionaryWriter(args[1]);
-                        DictionaryFormater df = new DictionaryFormater();
-                        JsonToTxtConverter js = new JsonToTxtConverter(reader, des, wr, df);
-                        js.Convert();
+                        txtConverter.Convert(args[0], args[1]);
                         break;
                     }
                 case "TXT":
                     {
-                        Reader reader = new Reader(inputPath);
-                        DictionaryFormater df = new DictionaryFormater();
-                        JsonWriter jw = new JsonWriter(args[1]);
-                        TxtToJsonConverter tj = new TxtToJsonConverter(reader, jw, df);
-                        tj.Convert();
-                        break;
+                       jsonConverter.Convert(args[0], args[1]);
+                       break;
                     }
 
                 default:
                     Console.WriteLine("Invalid file extension");
                     break;
             }
-    
+
         }
     }
 }

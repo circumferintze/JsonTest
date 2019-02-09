@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
-namespace JsonTestApp
+namespace JsonTestApp.Interfaces
 {
     public interface IDictionaryFormater
     {

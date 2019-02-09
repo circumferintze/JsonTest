@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace JsonTestApp
+namespace JsonTestApp.Interfaces
 {
     public interface IJsonWriter
     {
-        void Writer(JObject j);
+        void Writer(JObject j, string outputPath);
     }
 }

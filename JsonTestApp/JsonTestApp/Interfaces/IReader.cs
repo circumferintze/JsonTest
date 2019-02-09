@@ -1,7 +1,7 @@
-﻿namespace JsonTestApp
+﻿namespace JsonTestApp.Interfaces
 {
     public interface IReader
     {
-        string Read();
+        string Read(string inputPath);
     }
 }

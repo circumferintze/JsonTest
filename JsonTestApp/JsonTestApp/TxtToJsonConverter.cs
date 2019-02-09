@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using JsonTestApp.Interfaces;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace JsonTestApp
 {
-    public class TxtToJsonConverter
+    public class TxtToJsonConverter : ITxtToJsonConverter
     {
         private List<string> inputList;
         private JObject json;
@@ -24,12 +25,12 @@ namespace JsonTestApp
             _dictionaryFormater = dictionaryFormater;
         }
 
-        public void Convert()
+        public void Convert(string inputPath, string outputPath)
         {
-            var file = _reader.Read();
+            var file = _reader.Read(inputPath);
             var dictionary = _dictionaryFormater.ParseToDictionary(file);
             var json = CreateJson(dictionary);
-            _writer.Writer(json);
+            _writer.Writer(json, outputPath);
         }
 
         

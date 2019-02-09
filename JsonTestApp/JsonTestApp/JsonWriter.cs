@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using JsonTestApp.Interfaces;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 
@@ -6,15 +7,9 @@ namespace JsonTestApp
 {
     public class JsonWriter : IJsonWriter
     {
-        private readonly string _arg;
-
-        public JsonWriter(string arg)
+        public void Writer (JObject j, string outputPath)
         {
-            _arg = arg;
-        }
-        public void Writer (JObject j)
-        {
-            using (StreamWriter file = File.CreateText(_arg))
+            using (StreamWriter file = File.CreateText(outputPath))
             using (JsonTextWriter writer = new JsonTextWriter(file))
             {
                 writer.Formatting = Formatting.Indented;

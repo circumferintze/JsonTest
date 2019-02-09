@@ -1,18 +1,14 @@
-﻿using System.IO;
+﻿using JsonTestApp.Interfaces;
+using System.IO;
+
 
 namespace JsonTestApp
 {
     public class Reader : IReader
     {
-        private readonly string _arg;
-
-        public Reader(string arg)
+        public string Read(string inputPath)
         {
-            _arg = arg;
-        }
-        public string Read()
-        {
-            string filePath = System.IO.Path.GetFullPath(_arg);
+            string filePath = System.IO.Path.GetFullPath(inputPath);
 
             string file;
             using (StreamReader r = new StreamReader(filePath))
