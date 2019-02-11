@@ -7,9 +7,6 @@ namespace JsonTestApp.Interfaces
     {
         void Convert(string inputPath, string outputPath);
 
-        JProperty CreateFields(IEnumerable<string> keys, string value);
-
         JObject CreateJson(Dictionary<IEnumerable<string>, string> dictionary);
-
     }
 }

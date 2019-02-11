@@ -17,7 +17,7 @@ namespace JsonTestProject
             inputDictionary.Add("id1.id2", (JValue)1);
             expected.Add("\"id1\".\"id2\"", (JValue)1);
             Formater formater = new Formater();
-            
+
             var actual = formater.FormatDictionary(inputDictionary);
 
             actual.Should().BeEquivalentTo(expected);

@@ -29,17 +29,12 @@ namespace JsonTestApp
             _writer.Write(dictionary, outputPath);
         }
 
-        private Dictionary<string, JValue> GetFields(JToken jsonObject)
+        public Dictionary<string, JValue> GetFields(JToken jsonObject)
         {
             switch (jsonObject.Type)
             {
                 case JTokenType.Object:
                     foreach (var child in jsonObject.Children<JProperty>())
-                        GetFields(child);
-                    break;
-
-                case JTokenType.Array:
-                    foreach (var child in jsonObject.Children())
                         GetFields(child);
                     break;
 

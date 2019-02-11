@@ -31,14 +31,14 @@ namespace JsonTestApp
             JObject jsonObject = new JObject();
             foreach (var item in dictionary)
             {
-                var temporaryObject = new JObject { CreateFields(item.Key, item.Value) };
-                jsonObject.Merge(temporaryObject);
+                var temp = new JObject { CreateFields(item.Key, item.Value) };
+                jsonObject.Merge(temp);
             }
 
             return jsonObject;
         }
 
-        public JProperty CreateFields(IEnumerable<string> keys, string value)
+        private JProperty CreateFields(IEnumerable<string> keys, string value)
         {
             var jsonObject = new JObject();
 
