@@ -72,6 +72,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DeserializerTests.cs" />
+    <Compile Include="FormaterTests.cs" />
+    <Compile Include="JsonToTxtTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

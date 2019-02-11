@@ -31,64 +31,25 @@ namespace JsonTestApp
             JObject jsonObject = new JObject();
             foreach (var item in dictionary)
             {
-                var prop = CreateFields(item.Key, item.Value).Properties().First();
-                if (jsonObject.Properties().Select(p => p.Name).Any(n => n == prop.Name))
-                {
-                    jsonObject[prop.Name] = MergeJson(jsonObject[prop.Name].ToObject<JObject>().Properties(),
-                                           prop.Value.ToObject<JObject>().Properties().First());
-                }
-                else
-                {
-                    jsonObject.Add(prop);
-                }
+                var temporaryObject = new JObject { CreateFields(item.Key, item.Value) };
+                jsonObject.Merge(temporaryObject);
             }
 
             return jsonObject;
         }
 
-        public JToken MergeJson(IEnumerable<JProperty> existing, JProperty more)
-        {
-            var jsonObject = new JObject();
-
-            var same = existing.FirstOrDefault(p => p.Name == more.Name);
-
-            if (same != null)
-            {
-                same.Value = MergeJson(same.Value.ToObject<JObject>().Properties(),
-                    more.Value.ToObject<JObject>().Properties().First());
-
-                foreach (var prop in existing)
-                {
-                    jsonObject.Add(prop.Name, prop.Value);
-                }
-            }
-            else
-            {
-                foreach (var prop in existing)
-                {
-                    jsonObject.Add(prop.Name, prop.Value);
-                }
-
-                jsonObject.Add(more.Name, more.Value);
-            }
-
-            return jsonObject;
-        }
-
-        public JObject CreateFields(IEnumerable<string> keys, string value)
+        public JProperty CreateFields(IEnumerable<string> keys, string value)
         {
             var jsonObject = new JObject();
 
             if (keys.Count() == 1)
             {
-                jsonObject.Add(keys.ElementAt(0), value);
+                return new JProperty(keys.ElementAt(0), value);
             }
             else
             {
-                jsonObject.Add(keys.ElementAt(0), CreateFields(keys.Skip(1), value));
+                return new JProperty(keys.First(), new JObject(CreateFields(keys.Skip(1), value)));
             }
-
-            return jsonObject;
         }
     }
 }

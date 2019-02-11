@@ -3,6 +3,7 @@ using FluentAssertions;
 using JsonTestApp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
+using NSubstitute.ExceptionExtensions;
 
 namespace JsonTestProject
 {

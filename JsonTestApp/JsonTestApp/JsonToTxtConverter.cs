@@ -53,7 +53,7 @@ namespace JsonTestApp
                     break;
             }
 
-            return _formater.Format(fields);
+            return _formater.FormatDictionary(fields);
         }
     }
 }

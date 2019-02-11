@@ -6,7 +6,7 @@ namespace JsonTestApp
 {
     public class Formater : IFormater
     {
-        public Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
+        public Dictionary<string, JValue> FormatDictionary(Dictionary<string, JValue> dictionary)
         {
             Dictionary<string, JValue> formatedDictionary = new Dictionary<string, JValue>();
             foreach (var item in dictionary)
