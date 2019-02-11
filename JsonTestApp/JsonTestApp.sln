@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		JsonTestApp\bin\Debug\x.json = JsonTestApp\bin\Debug\x.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonTestProject", "JsonTestProject\JsonTestProject.csproj", "{ADB26387-6FDF-4618-9372-2A4A20872E0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{D7B1E66A-6E56-4855-976A-0BF49511387E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7B1E66A-6E56-4855-976A-0BF49511387E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7B1E66A-6E56-4855-976A-0BF49511387E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADB26387-6FDF-4618-9372-2A4A20872E0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADB26387-6FDF-4618-9372-2A4A20872E0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADB26387-6FDF-4618-9372-2A4A20872E0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADB26387-6FDF-4618-9372-2A4A20872E0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

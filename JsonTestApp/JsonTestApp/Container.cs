@@ -10,12 +10,12 @@ namespace JsonTestApp
             IUnityContainer container = new UnityContainer();
             container.RegisterType<JsonToTxtConverter>();
             container.RegisterType<TxtToJsonConverter>();
-            container.RegisterType<IReader, Reader>();
-            container.RegisterType<IDeserializer, Deserializer>();
-            container.RegisterType<IDictionaryWriter, DictionaryWriter>();
-            container.RegisterType<IFormater, Formater>();
-            container.RegisterType<IJsonWriter, JsonWriter>();
-            container.RegisterType<IDictionaryParser, DictionaryParser>();
+            container.RegisterSingleton<IReader, Reader>();
+            container.RegisterSingleton<IDeserializer, Deserializer>();
+            container.RegisterSingleton<IDictionaryWriter, DictionaryWriter>();
+            container.RegisterSingleton<IFormater, Formater>();
+            container.RegisterSingleton<IJsonWriter, JsonWriter>();
+            container.RegisterSingleton<IDictionaryParser, DictionaryParser>();
 
             return container;
         }
