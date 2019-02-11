@@ -17,7 +17,6 @@ namespace JsonTestApp
             container.RegisterSingleton<IDictionaryFormatter, DictionaryFormatter>();
             container.RegisterSingleton<IJsonWriter, JsonWriter>();
             container.RegisterSingleton<IDictionaryParser, DictionaryParser>();
-          
 
             return container;
         }

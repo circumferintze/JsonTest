@@ -11,7 +11,6 @@ namespace JsonTestApp
         public JsonToTxtConverter()
         {
             fields = new Dictionary<string, JValue>();
-            
         }
 
         public Dictionary<string, JValue> GetFields(JToken jsonObject)

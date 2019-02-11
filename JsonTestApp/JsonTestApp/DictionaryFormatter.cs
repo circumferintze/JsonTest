@@ -11,7 +11,6 @@ namespace JsonTestApp
             Dictionary<string, JValue> formatedDictionary = new Dictionary<string, JValue>();
             foreach (var item in dictionary)
             {
-
                 var key = item.Key.Trim(new char[] { '[' }).Replace("[", ".").Replace("]", "").Replace("'", "").Replace(".", @""".""");
                 formatedDictionary.Add("\"" + key + "\"", item.Value);
             }

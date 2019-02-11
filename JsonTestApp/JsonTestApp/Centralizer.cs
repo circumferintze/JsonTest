@@ -14,10 +14,10 @@ namespace JsonTestApp
         private readonly IDictionaryParser _dictionaryParser;
 
         public Centralizer(
-            IReader reader, 
-            IDeserializer deserializer, 
-            IDictionaryWriter dictionaryWriter, 
-            IDictionaryFormatter formater, 
+            IReader reader,
+            IDeserializer deserializer,
+            IDictionaryWriter dictionaryWriter,
+            IDictionaryFormatter formater,
             IJsonToTxtConverter txtConverter,
             IDictionaryParser dictionaryParser,
             ITxtToJsonConverter jsonConverter,
@@ -31,7 +31,7 @@ namespace JsonTestApp
             _dictionaryParser = dictionaryParser;
             _formater = formater;
             _txtConverter = txtConverter;
-           _jsonConverter = jsonConverter;
+            _jsonConverter = jsonConverter;
         }
 
         public void ConvertJsonToTxt(string inputPath, string outputPath)
