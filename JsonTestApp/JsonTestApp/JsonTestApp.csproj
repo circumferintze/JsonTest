@@ -61,9 +61,11 @@
   <ItemGroup>
     <Compile Include="Container.cs" />
     <Compile Include="Deserializer.cs" />
-    <Compile Include="DictionaryFormater.cs" />
+    <Compile Include="Formater.cs" />
+    <Compile Include="DictionaryParser.cs" />
+    <Compile Include="Interfaces\IDictionaryParser.cs" />
     <Compile Include="Interfaces\IJsonToTxtConverter.cs" />
-    <Compile Include="Interfaces\IDictionaryFormater.cs" />
+    <Compile Include="Interfaces\IFormater.cs" />
     <Compile Include="Interfaces\IJsonWriter.cs" />
     <Compile Include="Interfaces\IDeserializer.cs" />
     <Compile Include="Interfaces\IReader.cs" />

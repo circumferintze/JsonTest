@@ -1,23 +1,15 @@
 ﻿using System;
 using Unity;
-using JsonTestApp.Interfaces;
-using Unity.Injection;
 
 namespace JsonTestApp
 {
-    internal class Program
+    public class Program
     {
         private static void Main(string[] args)
         {
-            IUnityContainer container = new UnityContainer();
-            container.RegisterType<JsonToTxtConverter>();
-            container.RegisterType<TxtToJsonConverter>();
-            container.RegisterType<IReader, Reader>();
-            container.RegisterType<IDeserializer, Deserializer>();
-            container.RegisterType<IDictionaryWriter, DictionaryWriter>();
-            container.RegisterType<IDictionaryFormater, DictionaryFormater>();
-            container.RegisterType<IJsonWriter, JsonWriter>();
-            
+            Container unityContainer = new Container();
+            var container = unityContainer.Get();
+
             JsonToTxtConverter txtConverter = container.Resolve<JsonToTxtConverter>();
             TxtToJsonConverter jsonConverter = container.Resolve<TxtToJsonConverter>();
 
@@ -31,15 +23,14 @@ namespace JsonTestApp
                     }
                 case "TXT":
                     {
-                       jsonConverter.Convert(args[0], args[1]);
-                       break;
+                        jsonConverter.Convert(args[0], args[1]);
+                        break;
                     }
 
                 default:
                     Console.WriteLine("Invalid file extension");
                     break;
             }
-
         }
     }
 }

@@ -1,25 +1,12 @@
 ﻿using JsonTestApp.Interfaces;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace JsonTestApp
 {
-    public class DictionaryFormater : IDictionaryFormater
+    public class DictionaryParser : IDictionaryParser
     {
-        public Dictionary<string, JValue> Format(Dictionary<string, JValue> dictionary)
-        {
-            Dictionary<string, JValue> formatedDictionary = new Dictionary<string, JValue>();
-            foreach (var item in dictionary)
-            {
-                var key = item.Key.Replace(".", @""".""");
-                formatedDictionary.Add("\"" + key + "\"", item.Value);
-            }
-
-            return formatedDictionary;
-        }
-
         public Dictionary<IEnumerable<string>, string> ParseToDictionary(string file)
         {
             var inputList = file.Replace("\"", "").Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();

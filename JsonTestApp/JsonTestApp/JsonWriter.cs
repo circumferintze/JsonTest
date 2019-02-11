@@ -7,7 +7,7 @@ namespace JsonTestApp
 {
     public class JsonWriter : IJsonWriter
     {
-        public void Writer (JObject j, string outputPath)
+        public void Writer(JObject j, string outputPath)
         {
             using (StreamWriter file = File.CreateText(outputPath))
             using (JsonTextWriter writer = new JsonTextWriter(file))

@@ -1,6 +1,5 @@
 ﻿using JsonTestApp.Interfaces;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,32 +7,25 @@ namespace JsonTestApp
 {
     public class TxtToJsonConverter : ITxtToJsonConverter
     {
-        private List<string> inputList;
-        private JObject json;
-        private Dictionary<IEnumerable<string>, string> dictionary;
         private readonly IReader _reader;
         private readonly IJsonWriter _writer;
-        private readonly IDictionaryFormater _dictionaryFormater;
+        private readonly IDictionaryParser _dictionaryParser;
 
-        public TxtToJsonConverter(IReader reader, IJsonWriter writer, IDictionaryFormater dictionaryFormater)
+        public TxtToJsonConverter(IReader reader, IJsonWriter writer, IDictionaryParser dictionaryParser)
         {
-            inputList = new List<string>();
-            json = new JObject();
-            dictionary = new Dictionary<IEnumerable<string>, string>();
             _reader = reader;
             _writer = writer;
-            _dictionaryFormater = dictionaryFormater;
+            _dictionaryParser = dictionaryParser;
         }
 
         public void Convert(string inputPath, string outputPath)
         {
             var file = _reader.Read(inputPath);
-            var dictionary = _dictionaryFormater.ParseToDictionary(file);
+            var dictionary = _dictionaryParser.ParseToDictionary(file);
             var json = CreateJson(dictionary);
             _writer.Writer(json, outputPath);
         }
 
-        
         public JObject CreateJson(Dictionary<IEnumerable<string>, string> dictionary)
         {
             JObject jsonObject = new JObject();
@@ -56,7 +48,7 @@ namespace JsonTestApp
 
         public JToken MergeJson(IEnumerable<JProperty> existing, JProperty more)
         {
-            var obj = new JObject();
+            var jsonObject = new JObject();
 
             var same = existing.FirstOrDefault(p => p.Name == more.Name);
 
@@ -67,20 +59,20 @@ namespace JsonTestApp
 
                 foreach (var prop in existing)
                 {
-                    obj.Add(prop.Name, prop.Value);
+                    jsonObject.Add(prop.Name, prop.Value);
                 }
             }
             else
             {
                 foreach (var prop in existing)
                 {
-                    obj.Add(prop.Name, prop.Value);
+                    jsonObject.Add(prop.Name, prop.Value);
                 }
 
-                obj.Add(more.Name, more.Value);
+                jsonObject.Add(more.Name, more.Value);
             }
 
-            return obj;
+            return jsonObject;
         }
 
         public JObject CreateFields(IEnumerable<string> keys, string value)

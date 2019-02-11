@@ -1,7 +1,6 @@
 ﻿using JsonTestApp.Interfaces;
 using System.IO;
 
-
 namespace JsonTestApp
 {
     public class Reader : IReader
