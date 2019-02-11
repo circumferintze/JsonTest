@@ -26,7 +26,8 @@ namespace JsonTestApp
             var file = _reader.Read(inputPath);
             var jsonObject = _deserializer.Deserialize(file);
             var dictionary = GetFields(jsonObject);
-            _writer.Write(dictionary, outputPath);
+            var formatedDictionary = _formater.FormatDictionary(dictionary);
+            _writer.Write(formatedDictionary, outputPath);
         }
 
         public Dictionary<string, JValue> GetFields(JToken jsonObject)
@@ -43,12 +44,12 @@ namespace JsonTestApp
                     break;
 
                 default:
-                    fields.Add(_formater.FormatPath(jsonObject.Path),
+                    fields.Add(jsonObject.Path,
                         (JValue)jsonObject);
                     break;
             }
 
-            return _formater.FormatDictionary(fields);
+            return fields;
         }
     }
 }
