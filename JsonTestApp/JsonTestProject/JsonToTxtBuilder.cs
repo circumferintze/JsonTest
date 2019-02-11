@@ -9,14 +9,14 @@ namespace JsonTestProject
         private IReader _reader;
         private IDeserializer _deserializer;
         private IDictionaryWriter _writer;
-        private IFormater _formater;
+        private IDictionaryFormatter _formater;
 
         public JsonToTxtBuilder()
         {
             _reader = Substitute.For<IReader>();
             _deserializer = Substitute.For<IDeserializer>();
             _writer = Substitute.For<IDictionaryWriter>();
-            _formater = Substitute.For<IFormater>();
+            _formater = Substitute.For<IDictionaryFormatter>();
         }
 
         public JsonToTxtBuilder WithReader(IReader reader)
@@ -37,7 +37,7 @@ namespace JsonTestProject
             return this;
         }
 
-        public JsonToTxtBuilder WithFormater(IFormater formater)
+        public JsonToTxtBuilder WithFormater(IDictionaryFormatter formater)
         {
             _formater = formater;
             return this;

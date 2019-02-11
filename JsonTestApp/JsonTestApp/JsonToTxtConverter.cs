@@ -10,9 +10,9 @@ namespace JsonTestApp
         private readonly IReader _reader;
         private readonly IDeserializer _deserializer;
         private readonly IDictionaryWriter _writer;
-        private readonly IFormater _formater;
+        private readonly IDictionaryFormatter _formater;
 
-        public JsonToTxtConverter(IReader reader, IDeserializer deserializer, IDictionaryWriter writer, IFormater formater)
+        public JsonToTxtConverter(IReader reader, IDeserializer deserializer, IDictionaryWriter writer, IDictionaryFormatter formater)
         {
             fields = new Dictionary<string, JValue>();
             _reader = reader;

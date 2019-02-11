@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace JsonTestApp
 {
-    public class Formater : IFormater
+    public class DictionaryFormatter : IDictionaryFormatter
     {
         public Dictionary<string, JValue> FormatDictionary(Dictionary<string, JValue> dictionary)
         {
@@ -17,11 +17,6 @@ namespace JsonTestApp
             }
 
             return formatedDictionary;
-        }
-
-        public string FormatPath(string jsonObjectPath)
-        {
-            return jsonObjectPath.Trim(new char[] { '[' }).Replace("[", ".").Replace("]", "").Replace("'", "");
         }
     }
 }

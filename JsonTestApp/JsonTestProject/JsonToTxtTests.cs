@@ -1,9 +1,11 @@
-﻿using JsonTestApp;
+﻿using FluentAssertions;
+using JsonTestApp;
 using JsonTestApp.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
+using System.Collections.Generic;
 
 namespace JsonTestProject
 {
@@ -25,12 +27,18 @@ namespace JsonTestProject
                                 new JProperty("height", 200))));
 
             var deserializer = Substitute.For<IDeserializer>();
-
             deserializer.Deserialize(input).Returns(token);
 
             var converter = new JsonToTxtBuilder().WithDeserializer(deserializer).Build();
 
-            converter.GetFields(token);
+            var expected = new Dictionary<string, JValue>();
+            expected.Add("id", new JValue("001"));
+            expected.Add("image.url", new JValue("images / 0001.jpg"));
+            expected.Add("image.width", new JValue(200));
+            expected.Add("image.height", new JValue(200));
+
+            var actual = converter.GetFields(token);
+            actual.Should().BeEquivalentTo(expected);
         }
     }
 }

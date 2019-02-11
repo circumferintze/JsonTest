@@ -13,7 +13,7 @@ namespace JsonTestApp
             container.RegisterSingleton<IReader, Reader>();
             container.RegisterSingleton<IDeserializer, Deserializer>();
             container.RegisterSingleton<IDictionaryWriter, DictionaryWriter>();
-            container.RegisterSingleton<IFormater, Formater>();
+            container.RegisterSingleton<IDictionaryFormatter, DictionaryFormatter>();
             container.RegisterSingleton<IJsonWriter, JsonWriter>();
             container.RegisterSingleton<IDictionaryParser, DictionaryParser>();
 
