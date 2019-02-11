@@ -7,27 +7,11 @@ namespace JsonTestApp
     public class JsonToTxtConverter : IJsonToTxtConverter
     {
         private readonly Dictionary<string, JValue> fields;
-        private readonly IReader _reader;
-        private readonly IDeserializer _deserializer;
-        private readonly IDictionaryWriter _writer;
-        private readonly IDictionaryFormatter _formater;
 
-        public JsonToTxtConverter(IReader reader, IDeserializer deserializer, IDictionaryWriter writer, IDictionaryFormatter formater)
+        public JsonToTxtConverter()
         {
             fields = new Dictionary<string, JValue>();
-            _reader = reader;
-            _deserializer = deserializer;
-            _writer = writer;
-            _formater = formater;
-        }
-
-        public void Convert(string inputPath, string outputPath)
-        {
-            var file = _reader.Read(inputPath);
-            var jsonObject = _deserializer.Deserialize(file);
-            var dictionary = GetFields(jsonObject);
-            var formatedDictionary = _formater.FormatDictionary(dictionary);
-            _writer.Write(formatedDictionary, outputPath);
+            
         }
 
         public Dictionary<string, JValue> GetFields(JToken jsonObject)

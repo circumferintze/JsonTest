@@ -45,7 +45,7 @@ namespace JsonTestProject
 
         public JsonToTxtConverter Build()
         {
-            return new JsonToTxtConverter(_reader, _deserializer, _writer, _formater);
+            return new JsonToTxtConverter();
         }
     }
 }

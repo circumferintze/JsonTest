@@ -10,20 +10,19 @@ namespace JsonTestApp
             Container unityContainer = new Container();
             var container = unityContainer.Get();
 
-            JsonToTxtConverter txtConverter = container.Resolve<JsonToTxtConverter>();
-            TxtToJsonConverter jsonConverter = container.Resolve<TxtToJsonConverter>();
+            var centralizer = container.Resolve<Centralizer>();
 
             var extension = args[0].Split('.');
             switch (extension[1].ToUpper())
             {
                 case "JSON":
                     {
-                        txtConverter.Convert(args[0], args[1]);
+                        centralizer.ConvertJsonToTxt(args[0], args[1]);
                         break;
                     }
                 case "TXT":
                     {
-                        jsonConverter.Convert(args[0], args[1]);
+                        centralizer.ConvertTxtToJson(args[0], args[1]);
                         break;
                     }
 

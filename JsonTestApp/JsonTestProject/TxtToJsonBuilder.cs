@@ -37,7 +37,7 @@ namespace JsonTestProject
 
         public TxtToJsonConverter Build()
         {
-            return new TxtToJsonConverter(_reader, _writer, _dictionaryParser);
+            return new TxtToJsonConverter();
         }
     }
 }

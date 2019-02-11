@@ -1,10 +1,6 @@
 ﻿using FluentAssertions;
-using JsonTestApp;
-using JsonTestApp.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NSubstitute;
 using System.Collections.Generic;
 
 namespace JsonTestProject
@@ -15,9 +11,6 @@ namespace JsonTestProject
         [TestMethod]
         public void GetFields_JTokenInput_ReturnFormatedKeyValuePair()
         {
-            string input = "{\r\n\t\"id\": \"0001\",\r\n\t\"image\":\r\n\t\t{\r\n\t\t\t\"url\": " +
-                "\"images/0001.jpg\",\r\n\t\t\t\"width\": 200,\r\n\t\t\t\"height\": 200\r\n\t\t}\r\n}";
-
             var token = new JObject
                 (
                 new JProperty("id", "001"),
@@ -26,10 +19,7 @@ namespace JsonTestProject
                                 new JProperty("width", 200),
                                 new JProperty("height", 200))));
 
-            var deserializer = Substitute.For<IDeserializer>();
-            deserializer.Deserialize(input).Returns(token);
-
-            var converter = new JsonToTxtBuilder().WithDeserializer(deserializer).Build();
+            var converter = new JsonToTxtBuilder().Build();
 
             var expected = new Dictionary<string, JValue>();
             expected.Add("id", new JValue("001"));

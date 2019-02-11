@@ -7,25 +7,6 @@ namespace JsonTestApp
 {
     public class TxtToJsonConverter : ITxtToJsonConverter
     {
-        private readonly IReader _reader;
-        private readonly IJsonWriter _writer;
-        private readonly IDictionaryParser _dictionaryParser;
-
-        public TxtToJsonConverter(IReader reader, IJsonWriter writer, IDictionaryParser dictionaryParser)
-        {
-            _reader = reader;
-            _writer = writer;
-            _dictionaryParser = dictionaryParser;
-        }
-
-        public void Convert(string inputPath, string outputPath)
-        {
-            var file = _reader.Read(inputPath);
-            var dictionary = _dictionaryParser.ParseToDictionary(file);
-            var json = CreateJson(dictionary);
-            _writer.Writer(json, outputPath);
-        }
-
         public JObject CreateJson(Dictionary<IEnumerable<string>, string> dictionary)
         {
             JObject jsonObject = new JObject();
