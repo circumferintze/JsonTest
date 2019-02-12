@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using JsonTestApp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace JsonTestProject
                                 new JProperty("width", 200),
                                 new JProperty("height", 200))));
 
-            var converter = new JsonToTxtBuilder().Build();
+            var converter = new JsonToTxtConverter();
 
             var expected = new Dictionary<string, JValue>();
             expected.Add("id", new JValue("001"));
