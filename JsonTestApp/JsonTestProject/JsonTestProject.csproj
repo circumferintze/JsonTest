@@ -73,8 +73,9 @@
   <ItemGroup>
     <Compile Include="CentralizerTests.cs" />
     <Compile Include="DeserializerTests.cs" />
-    <Compile Include="FormaterTests.cs" />
+    <Compile Include="DictionaryFormaterTests.cs" />
     <Compile Include="CentralizerBuilder.cs" />
+    <Compile Include="DictionaryParserTests.cs" />
     <Compile Include="JsonToTxtTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

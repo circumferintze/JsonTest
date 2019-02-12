@@ -7,8 +7,19 @@ using System.Collections.Generic;
 namespace JsonTestProject
 {
     [TestClass]
-    public class FormaterTests
+    public class DictionaryFormaterTests
     {
+        [TestMethod]
+        public void FormatDictionary_ValidInput_ReturnCorrectType()
+        {
+            Dictionary<string, JValue> inputDictionary = new Dictionary<string, JValue>();
+            DictionaryFormatter formater = new DictionaryFormatter();
+
+            var actual = formater.FormatDictionary(inputDictionary);
+
+            actual.Should().BeOfType<Dictionary<string, JValue>>();
+        }
+
         [TestMethod]
         public void FormatDictionary_ValidInput_ReturnCorrectFormat()
         {

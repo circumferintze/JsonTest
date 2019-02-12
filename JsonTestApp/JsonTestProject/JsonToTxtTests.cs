@@ -10,7 +10,24 @@ namespace JsonTestProject
     public class JsonToTxtTests
     {
         [TestMethod]
-        public void GetFields_JTokenInput_ReturnFormatedKeyValuePair()
+        public void GetFields_JTokenInput_ReturnCorrectType()
+        {
+            var token = new JObject
+                (
+                new JProperty("id", "001"),
+                new JProperty("image",
+                    new JObject(new JProperty("url", "images / 0001.jpg"),
+                                new JProperty("width", 200),
+                                new JProperty("height", 200))));
+
+            var converter = new JsonToTxtConverter();
+
+            var actual = converter.GetFields(token);
+            actual.Should().BeOfType<Dictionary<string, JValue>>();
+        }
+
+        [TestMethod]
+        public void GetFields_JTokenInput_ReturnKeyValuePair()
         {
             var token = new JObject
                 (
