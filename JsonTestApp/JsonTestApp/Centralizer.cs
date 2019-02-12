@@ -48,7 +48,7 @@ namespace JsonTestApp
             var file = _reader.Read(inputPath);
             var dictionary = _dictionaryParser.ParseToDictionary(file);
             var json = _jsonConverter.CreateJson(dictionary);
-            _jsonWriter.Writer(json, outputPath);
+            _jsonWriter.Write(json, outputPath);
         }
     }
 }

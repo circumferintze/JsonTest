@@ -4,6 +4,6 @@ namespace JsonTestApp.Interfaces
 {
     public interface IJsonWriter
     {
-        void Writer(JObject j, string outputPath);
+        void Write(JObject j, string outputPath);
     }
 }

@@ -2,11 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JsonTestProject
 {
@@ -158,14 +154,91 @@ namespace JsonTestProject
             formater.Received().FormatDictionary(dictionary);
         }
 
-    }
+        [TestMethod]
+        public void ConvertTxtToJson_ReadMethod_ReceiveCall()
+        {
+            var reader = Substitute.For<IReader>();
+            reader.Read("inputPath").Returns("file");
 
-    //    public void ConvertJsonToTxt(string inputPath, string outputPath)
-    //    {
-    //        var file = _reader.Read(inputPath);
-    //        var jsonObject = _deserializer.Deserialize(file);
-    //        var dictionary = _txtConverter.GetFields(jsonObject);
-    //        var formatedDictionary = _formater.FormatDictionary(dictionary);
-    //        _dictionaryWriter.Write(formatedDictionary, outputPath);
-    //    }
+            var centralizer = new CentralizerBuilder().WithReader(reader).Build();
+            centralizer.ConvertTxtToJson("inputPath", "outputPath");
+
+            reader.Received().Read("inputPath");
+        }
+
+        [TestMethod]
+        public void ConvertTxtToJson_WriteMethod_ReceiveCall()
+        {
+            var dictionaryWriter = Substitute.For<IDictionaryWriter>();
+            var token = new JObject
+               (
+               new JProperty("id", "001"),
+               new JProperty("image",
+                   new JObject(new JProperty("url", "images / 0001.jpg"),
+                               new JProperty("width", 200),
+                               new JProperty("height", 200))));
+
+            var jsonWriter = Substitute.For<IJsonWriter>();
+            jsonWriter.Write(token, "outputPath");
+
+            var centralizer = new CentralizerBuilder().WithDictionaryWriter(dictionaryWriter).Build();
+            centralizer.ConvertJsonToTxt("inputPath", "outputPath");
+
+            jsonWriter.Received().Write(token, "outputPath");
+        }
+
+        [TestMethod]
+        public void ConvertTxtToJson_ParseDictionaryMethod_ReceiveCall()
+        {
+            var reader = Substitute.For<IReader>();
+            reader.Read("inputPath").Returns("file");
+
+            var dictionary = new Dictionary<IEnumerable<string>, string>();
+            dictionary.Add(new List<string>() { "abc", "def", "egh" }, "value");
+
+            var dictionaryParser = Substitute.For<IDictionaryParser>();
+            dictionaryParser.ParseToDictionary("file").Returns(dictionary);
+
+            var centralizer = new CentralizerBuilder()
+                .WithReader(reader)
+                .WithDictionaryParser(dictionaryParser)
+                .Build();
+            centralizer.ConvertTxtToJson("inputPath", "outputPath");
+
+            dictionaryParser.Received().ParseToDictionary("file");
+        }
+
+        [TestMethod]
+        public void ConvertTxtToJson_CreateJsonMethod_ReceiveCall()
+        {
+            var reader = Substitute.For<IReader>();
+            reader.Read("inputPath").Returns("file");
+
+            var dictionary = new Dictionary<IEnumerable<string>, string>();
+            dictionary.Add(new List<string>() { "abc", "def", "egh" }, "value");
+
+            var dictionaryParser = Substitute.For<IDictionaryParser>();
+            dictionaryParser.ParseToDictionary("file").Returns(dictionary);
+
+            var token = new JObject
+              (
+              new JProperty("id", "001"),
+              new JProperty("image",
+                  new JObject(new JProperty("url", "images / 0001.jpg"),
+                              new JProperty("width", 200),
+                              new JProperty("height", 200))));
+ 
+            var jsonConverter = Substitute.For<ITxtToJsonConverter>();
+            jsonConverter.CreateJson(dictionary).Returns(token);
+
+            var centralizer = new CentralizerBuilder()
+                .WithReader(reader)
+                .WithDictionaryParser(dictionaryParser)
+                .WithJsonToTxtConverter(jsonConverter)
+                .Build();
+            centralizer.ConvertTxtToJson("inputPath", "outputPath");
+
+            jsonConverter.Received().CreateJson(dictionary);
+        }
+    }
 }
